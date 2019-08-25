@@ -1,0 +1,13 @@
+__pycache__/
+.idea/
+*.log
+*.pot
+*.pyc
+db.sqlite3
+virt_env/
+log/
+media/
+venv/
+core/migrations/
+user.json
+dat.json
