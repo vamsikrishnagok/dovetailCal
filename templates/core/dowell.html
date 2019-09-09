@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="main-card mb-3 card">
-        <div class="card-body"><h5 class="card-title">Dovetail Calculate</h5>
+        <div class="card-body"><h5 class="card-title">Dowell Calculate</h5>
             <form id="dovetail_form" action="." method="post">
                 {% csrf_token %}
                 <div class="form-row">
@@ -158,15 +158,15 @@
     <script>
 
         function calculate() {
-            document.getElementById("h3").innerText = document.getElementById("width").value
-            document.getElementById("left").innerText = document.getElementById("depth").value - (document.getElementById("thickness").value * 2)
-            document.getElementById("right").innerText = document.getElementById("depth").value - (document.getElementById("thickness").value * 2)
-            document.getElementById("leftcenter").innerText = document.getElementById("depth").value - document.getElementById("cdepth").value - (2 * document.getElementById("thickness").value)
-            document.getElementById("rightcenter").innerText = document.getElementById("depth").value - document.getElementById("cdepth").value - (2 * document.getElementById("thickness").value)
+            document.getElementById("h3").innerText = document.getElementById("width").value -  (document.getElementById("thickness").value * 2)
+            document.getElementById("left").innerText = document.getElementById("depth").value
+            document.getElementById("right").innerText = document.getElementById("depth").value
+            document.getElementById("leftcenter").innerText = document.getElementById("cdepth").value + document.getElementById("thickness")
+            document.getElementById("rightcenter").innerText =  document.getElementById("cdepth").value + document.getElementById("thickness")
 
-            document.getElementById("backleft").innerText = document.getElementById("leftarm").value
-            document.getElementById("backcenter").innerText = document.getElementById("depth").value - document.getElementById("rightarm").value - document.getElementById("leftarm").value + (2 * document.getElementById("thickness").value);
-            document.getElementById("backright").innerText = document.getElementById("rightarm").value
+            document.getElementById("backleft").innerText = document.getElementById("leftarm").value -  (document.getElementById("thickness").value * 2)
+            document.getElementById("backcenter").innerText =  document.getElementById("rightarm").value - (document.getElementById("thickness").value * 2)
+            document.getElementById("backright").innerText = document.getElementById("rightarm").value - (document.getElementById("thickness").value * 2)
         }
 
 

@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="main-card mb-3 card">
+                                    <div class="card-body"><h5 class="card-title">List</h5>
+                                        <table class="mb-0 table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Sheetname</th>
+                                                <th>Created By</th>
+                                                <th>Created DateTime</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for each in dovetails %}
+                                            <tr>
+                                                <th scope="row">{{ each.id }}</th>
+                                                <td>{{ each.sheetname }}</td>
+                                                <td>{{ each.createdBy.first_name }}</td>
+                                                <td>{{ each.createdDate }}</td>
+                                            </tr>
+                                            {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+
+    </script>
+{% endblock %}
