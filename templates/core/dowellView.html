@@ -1,0 +1,204 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="main-card mb-3 card">
+        <div class="card-body"><h5 class="card-title">Dovetail Calculate</h5>
+            <form id="dovetail_form" action="." method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-6">
+                        <div class="position-relative form-group"><label for="leftarm"
+                                                                         class="">Left Arm</label><input name="leftarm"
+                                                                                                         id="leftarm"
+                                                                                                         placeholder="Enter Value"
+                                                                                                         value={{ dovetail.leftArm }}
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="position-relative form-group"><label for="rightarm"
+                                                                         class="">Right Arm</label><input
+                                name="rightarm"
+                                id="rightarm"
+                                value={{ dovetail.rightArm }}
+                                placeholder="Enter Value"
+                                type="text"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-6">
+                        <div class="position-relative form-group"><label for="depth"
+                                                                         class="">Depth</label><input name="depth"
+                                                                                                      id="depth"
+                                                                                                      value={{ dovetail.depth }}
+                                                                                                      placeholder="Enter Value"
+                                                                                                      type="text"
+                                                                                                      class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="position-relative form-group"><label for="width"
+                                                                         class="">Width</label><input name="width"
+                                                                                                      id="width"
+                                                                                                      placeholder="Enter Value"
+                                                                                                      value={{ dovetail.width }}
+                                                                                                      type="text"
+                                                                                                      class="form-control"
+                                                                                                      onchange="h3(this.value)">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="position-relative form-group"><label for="thickness" class="">Thickness</label><input
+                        name="thickness" id="thickness" placeholder="Enter thickness" type="text" value={{ dovetail.thickness }}
+                        class="form-control">
+                </div>
+                <div class="position-relative form-group"><label for="cdepth" class="">Center Depth</label><input
+                        name="cdepth" id="cdepth" placeholder="Enter center depth" type="text" value={{ dovetail.centerDepth }}
+                        class="form-control">
+                </div>
+
+                <button class="mt-2 btn btn-primary" type="button" onclick="calculate()">Calculate</button>
+
+                <button type="button" class="mt-2 btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Update
+                </button>
+
+            </form>
+        </div>
+    </div>
+    <div class="main-card mb-3 card">
+
+
+        <div class="card-body"><h5 class="card-title">Cut Size</h5>
+            <table class="mb-0 table table-bordered">
+
+                <tbody>
+                <tr>
+                    <th scope="row">Front</th>
+                    <td id="h3"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Left</th>
+                    <td id="left"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Right</th>
+                    <td id="right"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Left Center</th>
+                    <td id="leftcenter"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Right Center</th>
+                    <td id="rightcenter"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Back Left</th>
+                    <td id="backleft"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Back Center</th>
+                    <td id="backcenter"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Back Right</th>
+                    <td id="backright"></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div></div></div></div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Save</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"><label>Enter Sheetname</label>
+                    <input name="sheetname"
+                           id="sheetname"
+                           placeholder="Enter Sheetname"
+                           type="text"
+                           class="form-control"
+                           form="dovetail_form"
+                           value="{{ dovetail.sheetname }}"
+                           required
+                    >
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
+                    <button type="button" class="btn btn-primary" form="dovetail_form" onclick="submit()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+    $(document).ready(function(){
+          document.getElementById("h3").innerText = document.getElementById("width").value -  (document.getElementById("thickness").value * 2);
+            document.getElementById("left").innerText = document.getElementById("depth").value;
+            document.getElementById("right").innerText = document.getElementById("depth").value;
+            document.getElementById("leftcenter").innerText = document.getElementById("cdepth").value + document.getElementById("thickness");
+            document.getElementById("rightcenter").innerText =  document.getElementById("cdepth").value + document.getElementById("thickness");
+
+            document.getElementById("backleft").innerText = document.getElementById("leftarm").value -  (document.getElementById("thickness").value * 2);
+            document.getElementById("backcenter").innerText =  document.getElementById("rightarm").value - (document.getElementById("thickness").value * 2);
+            document.getElementById("backright").innerText = document.getElementById("rightarm").value - (document.getElementById("thickness").value * 2);
+    });
+
+        function calculate() {
+           document.getElementById("h3").innerText = document.getElementById("width").value -  (document.getElementById("thickness").value * 2);
+            document.getElementById("left").innerText = document.getElementById("depth").value;
+            document.getElementById("right").innerText = document.getElementById("depth").value;
+            document.getElementById("leftcenter").innerText = document.getElementById("cdepth").value + document.getElementById("thickness");
+            document.getElementById("rightcenter").innerText =  document.getElementById("cdepth").value + document.getElementById("thickness");
+
+            document.getElementById("backleft").innerText = document.getElementById("leftarm").value -  (document.getElementById("thickness").value * 2);
+            document.getElementById("backcenter").innerText =  document.getElementById("rightarm").value - (document.getElementById("thickness").value * 2);
+            document.getElementById("backright").innerText = document.getElementById("rightarm").value - (document.getElementById("thickness").value * 2);
+        }
+
+
+        function left(val) {
+            document.getElementById("left").innerText = val
+        }
+
+        function submit() {
+            var sheetname = document.getElementById("sheetname").value;
+
+            $("<input />").attr("type", "hidden")
+                .attr("name", "sheetname")
+                .attr("value", sheetname)
+                .appendTo("#dovetail_form");
+
+
+            document.getElementById('dovetail_form').submit();
+
+        }
+    </script>
+{% endblock %}

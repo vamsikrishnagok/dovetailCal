@@ -8,5 +8,6 @@ urlpatterns = [
     path('dovetail/list', dovetailList, name="dovetailList"),
     path('dowell/', dowell, name="dowell"),
     path('dowell/list', dowellList, name="dowellList"),
+    path('dovetail/<int:id>/', Dovetailview, name="Dovetailview")
 
 ]
