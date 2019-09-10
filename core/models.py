@@ -26,3 +26,18 @@ class Dowell(models.Model):
     createdDate = models.DateTimeField()
     updatedDate = models.DateTimeField()
     createdBy = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True,null=True)
+
+
+class Cutsheet(models.Model):
+    orderNo = models.CharField(max_length=250)
+    trkWeight = models.FloatField()
+    pallets = models.FloatField()
+    orderDate = models.DateTimeField()
+    shipDate = models.DateTimeField()
+    totalBoxes = models.IntegerField()
+    shippingInstructions = models.TextField()
+    errNo = models.IntegerField()
+    sideSQFT = models.FloatField()
+    bottomSQFT = models.FloatField()
+    createdDate = models.DateTimeField(blank=True,null=True)
+    createdBy = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True,null=True)

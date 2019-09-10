@@ -22,5 +22,6 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('accounts/login/', auth_views.LoginView.as_view(template_name='Auth/login.html'),name="login"),
+                  path('accounts/logout',auth_views.logout_then_login),
                   path('', include('core.urls')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

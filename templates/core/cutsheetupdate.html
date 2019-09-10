@@ -1,0 +1,129 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="main-card mb-3 card">
+        <div class="card-body"><h5 class="card-title">Cutsheet</h5>
+            <form id="dovetail_form" action="." method="post">
+                {% csrf_token %}
+                <div class="form-row">
+
+
+                    <div class="col-12">
+                        <div class="position-relative form-group"><label for="orderNo"
+                                                                         class="">Order Number</label><input name="orderNo"
+                                                                                                         id="orderNo"
+                                                                                                         placeholder="Enter Value"
+                                                                                                         value={{ cutsheet.orderNo }}
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+  <div class="col-12">
+                        <div class="position-relative form-group"><label for="trkWeight"
+                                                                         class="">TRK Weight</label><input name="trkWeight"
+                                                                                                         id="trkWeight"
+                                                                                                         placeholder="Enter Value"
+                                                                                                         value={{ cutsheet.trkWeight }}
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-12">
+                        <div class="position-relative form-group"><label for="pallets"
+                                                                         class="">Pallets</label><input name="pallets"
+                                                                                                         id="pallets"
+                                                                                                         placeholder="Enter Value"
+                                                                                                         value={{ cutsheet.pallets }}
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-12">
+                        <div class="position-relative form-group"><label for="orderDate"
+                                                                         class="">Order Date</label><input name="orderDate"
+                                                                                                         id="orderDate"
+                                                                                                         placeholder="Enter Value"
+                                                                                                           value={{ cutsheet.orderDate|date:"Y-m-d" }}
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-12">
+                        <div class="position-relative form-group"><label for="shipDate"
+                                                                         class="">Ship Date</label><input name="shipDate"
+                                                                                                         id="shipDate"
+                                                                                                         placeholder="Enter Value"
+                                                                                                          value = {{ cutsheet.shipDate|date:"Y-m-d" }}
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-12">
+                        <div class="position-relative form-group"><label for="totalBoxes"
+                                                                         class="">Total Boxes</label><input name="totalBoxes"
+                                                                                                         id="totalBoxes"
+                                                                                                         placeholder="Enter Value"
+                                                                                                            value = {{ cutsheet.totalBoxes }}
+                                                                                                         type="number"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-12">
+                        <div class="position-relative form-group"><label for="shippingInstructions"
+                                                                         class="">Shipping Instructions</label><input name="shippingInstructions"
+                                                                                                         id="shippingInstructions"
+                                                                                                         placeholder="Enter Value"
+                                                                                                                      value={{ cutsheet.shippingInstructions }}
+
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-12">
+                        <div class="position-relative form-group"><label for="errNo"
+                                                                         class="">Err Number</label><input name="errNo"
+                                                                                                         id="errNo"
+                                                                                                         placeholder="Enter Value"
+                                                                                                         value={{ cutsheet.errNo }}
+                                                                                                         type="number"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-12">
+                        <div class="position-relative form-group"><label for="sideSQFT"
+                                                                         class="">Side SQRT</label><input name="sideSQFT"
+                                                                                                         id="sideSQFT"
+                                                                                                         placeholder="Enter Value"
+                                                                                                         value={{ cutsheet.sideSQFT }}
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-12">
+                        <div class="position-relative form-group"><label for="bottomSQFT"
+                                                                         class="">Bottom SQFT</label><input name="bottomSQFT"
+                                                                                                         id="bottomSQFT"
+                                                                                                         placeholder="Enter Value"
+                                                                                                         value={{ cutsheet.bottomSQFT }}
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="mt-2 btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div></div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

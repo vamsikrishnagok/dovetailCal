@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Dovetail,Dowell
+from .models import Dovetail,Dowell,Cutsheet
 import datetime
 # Create your views here.
 
@@ -107,4 +107,61 @@ def dowellList(request):
     return render(request, 'core/dowellList.html',context)
 
 
+@login_required
+def cutsheet(request):
+    if request.method == "GET":
+        return render(request, 'core/cutsheet.html')
+    if request.method == "POST":
+        cutsheet = Cutsheet()
+        cutsheet.orderNo = request.POST["orderNo"]
+        cutsheet.trkWeight =request.POST["trkWeight"]
+        cutsheet.pallets = request.POST["pallets"]
+        cutsheet.orderDate = request.POST["orderDate"]
+        cutsheet.shipDate = request.POST["shipDate"]
+        cutsheet.totalBoxes = request.POST["totalBoxes"]
+        cutsheet.shippingInstructions = request.POST["shippingInstructions"]
+        cutsheet.errNo = request.POST["errNo"]
+        cutsheet.sideSQFT = request.POST["sideSQFT"]
+        cutsheet.bottomSQFT = request.POST["bottomSQFT"]
+        cutsheet.createdDate = datetime.datetime.now()
+        cutsheet.createdBy = request.user
+        cutsheet.save()
+        return render(request, 'core/cutsheet.html')
 
+
+@login_required
+def cutsheetList(request):
+    cutsheets = Cutsheet.objects.all()
+    context = {
+        "cutsheets":cutsheets
+    }
+    return render(request, 'core/cutsheetList.html',context=context)
+
+
+@login_required
+def cutsheetview(request,id):
+    if request.method == "GET":
+        cutsheet = Cutsheet.objects.get(id=id)
+        context = {
+            "cutsheet":cutsheet
+        }
+        return render(request,'core/cutsheetupdate.html',context=context)
+    if request.method == "POST":
+        cutsheet = Cutsheet.objects.get(id=id)
+        cutsheet.orderNo = request.POST["orderNo"]
+        cutsheet.trkWeight =request.POST["trkWeight"]
+        cutsheet.pallets = request.POST["pallets"]
+        cutsheet.orderDate = request.POST["orderDate"]
+        cutsheet.shipDate = request.POST["shipDate"]
+        cutsheet.totalBoxes = request.POST["totalBoxes"]
+        cutsheet.shippingInstructions = request.POST["shippingInstructions"]
+        cutsheet.errNo = request.POST["errNo"]
+        cutsheet.sideSQFT = request.POST["sideSQFT"]
+        cutsheet.bottomSQFT = request.POST["bottomSQFT"]
+        cutsheet.createdDate = datetime.datetime.now()
+        cutsheet.createdBy = request.user
+        cutsheet.save()
+        context = {
+            "cutsheet": cutsheet
+        }
+        return render(request, 'core/cutsheetupdate.html',context=context)
